@@ -1,12 +1,16 @@
 import './Dashboard.css'
 import Header from './Header'
 import CurrentProject from '../components/CurrentProject'
-import ProjectCard from '../components/ProjectCard'
-import { useState } from 'react';
 import Projects from './Projects';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import ProjectCard from '../components/ProjectCard'
+import Logs from './Logs';
+import Navbar from './Navbar'
+import { useState } from 'react';
+
+import { Route, Switch } from 'react-router-dom'
 
 import React from 'react'
+
 
 const Dashboard = ({currentUser, setLoggedIn}) => {
     const [currentProject, setCurrentProject] = useState(null);
@@ -120,37 +124,34 @@ const Dashboard = ({currentUser, setLoggedIn}) => {
     }
 
     return (
-        <div className = 'dashboard-container'>
-            <Header
-                currentUser={currentUser} 
-                setLoggedIn={setLoggedIn}
-            />
-
-            <CurrentProject 
-                currentProject = {currentProject} 
-                currentUser={currentUser} 
-                dataState = {{'logData': logData, 'setLogData': setLogData}}
-                dateFormatter = {dateFormatter}
-            />
-
-            <nav>
-                <a>Projects</a>
-                <a>Logs</a>
-                <a>Charts</a>
-            </nav>
-
-            <Projects
-                addProject = {addProject}
-                setNewProject = {setNewProject}
-                currentUserProjects = {currentUserProjects}
+            <div className = 'dashboard-container'>
+                <Header
+                    currentUser={currentUser} 
+                    setLoggedIn={setLoggedIn}
                 />
 
-            <section className ='log-history'> 
-                <h3>Logs History</h3>
-            </section>
-        </div>
-        
+                <CurrentProject 
+                    currentProject = {currentProject} 
+                    currentUser={currentUser} 
+                    dataState = {{'logData': logData, 'setLogData': setLogData}}
+                    dateFormatter = {dateFormatter}
+                />
 
+                <Navbar/>
+
+                <Switch>
+                    <Route path='/projects'>
+                        <Projects
+                        addProject = {addProject}
+                        setNewProject = {setNewProject}
+                        currentUserProjects = {currentUserProjects}
+                        />
+                    </Route>
+                    <Route path='/logs'>
+                        <Logs/>
+                    </Route>
+                </Switch>
+            </div>
     )
 }
 
