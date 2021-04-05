@@ -1,117 +1,158 @@
 import './Dashboard.css'
+import Header from './Header'
+import CurrentProject from '../components/CurrentProject'
+import ProjectCard from '../components/ProjectCard'
 import { useState } from 'react';
+import Projects from './Projects';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-export default function (props) {
-    const [timerOn, setTimerOn] = useState(false);
-    const [currentProject, setCurrentProject] = useState('');
-    const [currentProjectTracker, setCurrentProjectTracker] = useState(null);
-    const [allProjects, setAllProjects] = useState(props.logData)
-    let durationMS;
-    let isNewProject;
-    
-    function logHandler() {
-        let date = new Date();
-        let time = date.getTime();
+import React from 'react'
 
-        if (timerOn == false) {
-            setTimerOn(true)
-            props.logData[1].startDate = date;
-            props.logData[1].startTime = time;
-        } else {
-            setTimerOn(false)
-            props.logData[1].endDate = date;
-            props.logData[1].endTime = time;
+const Dashboard = ({currentUser, setLoggedIn}) => {
+    const [currentProject, setCurrentProject] = useState(null);
+    const [newProject, setNewProject] = useState('')
+    const [logData, setLogData] = useState([
+        {
+            projectName:'Eleni project 1',
+            userName:'Eleni',
+            startDate: 'Wed Mar 31 2021',
+            logDurationSec:20
+        },
+        {
+            projectName:'Marios project',
+            userName:'Mario',
+            startDate: 'Wed Mar 31 2021',
+            logDurationSec:50
+        },
+        {
+            projectName:'Eleni project 2',
+            userName:'Eleni',
+            startDate: 'Wed Mar 31 2021',
+            logDurationSec:10
+        },
+        {
+            projectName:'Luigi project 6',
+            userName:'Luigi',
+            startDate: 'Wed Mar 31 2021',
+            logDurationSec:60
+        },
+        {
+            projectName:'Luigi project 6',
+            userName:'Luigi',
+            startDate: 'Wed Mar 31 2021',
+            logDurationSec:40
+        },
+        {
+            projectName:'Eleni project 2',
+            userName:'Eleni',
+            startDate: 'Wed Mar 31 2021',
+            logDurationSec:40
+        },
+    ])
 
-            durationMS = props.logData[1].endTime - props.logData[1].startTime;
-            console.log(typeof durationMS);
-            props.logData[1].duration = msToMinutesAndSeconds(durationMS)
-            console.log(durationMS);
-            console.log(props.logData[1].duration);
-            console.log(msToMinutesAndSeconds);
-        }
-        console.log(date, time);
-        console.log(props.logData);
-    }
+    const timeFormatter = (totalSeconds) => {
+        let seconds = ((totalSeconds)%60);
+        let minutes =  (Math.floor(totalSeconds/60)%60);
+        let hours = (Math.floor(totalSeconds/3600));
 
-    function msToMinutesAndSeconds(duration) {
-        let minutes = Math.floor(duration / 60000);
-        let seconds = ((duration % 60000) / 1000).toFixed(0);
-        return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-    }
-
-    function addProject () {
-        props.logData.push({
-            projectName:currentProject,
-            userName: props.currentUser,
-            startDate: '',
-            endDate: '',
-            startTime: '',
-            endTime:''
-        })
-        console.log(props.logData);
-
-        setCurrentProjectTracker (   
-        <div>
-            <div>
-                {currentProject}
-            </div>
-            <div>
-            {
-                timerOn ?        
-                <button className='stop-button' onClick={logHandler}>⏸️</button>
-                :<button className='start-button' onClick={logHandler}>▶</button>
+        if (minutes <= 9) {
+            if (seconds <= 9) {
+                return (`${hours}:0${minutes}:0${seconds}`)
+            } else {
+                return (`${hours}:0${minutes}:${seconds}`)
             }
-            </div>
-        </div>)
+        } else {
+            if (seconds <= 9) {
+                return (`${hours}:${minutes}:0${seconds}`)
+            } else {
+                return (`${hours}:${minutes}:${seconds}`)
+            }
+        }
     }
 
-/*     let currentUserProjects = props.logData.filter(log => log.userName === props.currentUser).map(item => <option>{item.projectName}</option>); */
+    const dateFormatter = () => {
+        const timeElapsed = Date.now();
+        const today = new Date(timeElapsed);
+        let displayDate = today.toDateString();
+        return displayDate;
+    }
 
-    let currentUserProjects = props.logData
-        .filter(log => log.userName === props.currentUser)
-        .map(item =><button>
-                        <div className='project-name'>{item.projectName}</div>
-                        <div className='project-time'>{item.displayDuration}</div>
-                    </button>);
+    const currentUserProjectsArray = logData.filter(log => log.userName === currentUser)
 
-    let logHistoryHandler = props.logData.filter(log => log.userName === props.currentUser).map (
-        log =>  <div className ='project-container'>
-                    <div>{log.projectName}</div>
-                    <div>{log.startDate}</div>
-                    <div>{log.displayDuration}</div>
-                </div>
-    )
+    const totalProjectTimes = [];
+
+    currentUserProjectsArray.forEach(project => {
+        let foundProject = totalProjectTimes.find(totalProject => {
+            return totalProject.projectName === project.projectName
+        })
+        if (foundProject !== undefined) {
+            foundProject.totalDurationSec += project.logDurationSec;
+        } else {
+            totalProjectTimes.push({projectName: project.projectName, startDate: project.startDate, totalDurationSec: project.logDurationSec})
+        }
+    })
+
+    const currentUserProjects = totalProjectTimes.map((item,index) =>
+        <ProjectCard 
+            key = {index}
+            item = {item} 
+            setCurrentProject = {setCurrentProject} 
+            timeFormatter = {timeFormatter}
+        />
+        );
+    
+    const addProject = (e) => {
+        e.preventDefault();
+
+        if (!newProject) {
+            alert('please add a task')
+            return
+        }
+
+        setLogData([...logData, {
+            projectName: newProject,
+            userName: currentUser,
+            startDate: dateFormatter(),
+            logDurationSec:0
+        }])
+
+        console.log(logData);
+    }
 
     return (
         <div className = 'dashboard-container'>
-            <section>
-                <h3>Welcome {props.currentUser}</h3>
-                <button>logout</button>
-            </section>
+            <Header
+                currentUser={currentUser} 
+                setLoggedIn={setLoggedIn}
+            />
 
-            <section className='current-project-container'>
-                <h3>Choose or add a project to start tracking...</h3>
-                {currentProjectTracker}
-            </section>
+            <CurrentProject 
+                currentProject = {currentProject} 
+                currentUser={currentUser} 
+                dataState = {{'logData': logData, 'setLogData': setLogData}}
+                dateFormatter = {dateFormatter}
+            />
 
-            <section className = 'select-container' onClick={(e)=>setCurrentProject(e.target.value)}>
-                <div className ='project-container'>
-                    <input onChange={(e)=>setCurrentProject(e.target.value)}/>
-                    <button className='add-button' onClick = {addProject}>Add</button>
-                </div>
+            <nav>
+                <a>Projects</a>
+                <a>Logs</a>
+                <a>Charts</a>
+            </nav>
 
-{/*                 <select onChange={(e)=>setCurrentProject(e.target.value)}>
-                    {currentUserProjects}
-                </select> */}
-                {currentUserProjects}
-            </section>
+            <Projects
+                addProject = {addProject}
+                setNewProject = {setNewProject}
+                currentUserProjects = {currentUserProjects}
+                />
 
             <section className ='log-history'> 
                 <h3>Logs History</h3>
-                {logHistoryHandler}
             </section>
         </div>
         
 
     )
 }
+
+export default Dashboard
+

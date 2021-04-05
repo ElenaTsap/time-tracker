@@ -16,33 +16,49 @@
     padding: 18px 32px;
 }
 
-.dashboard-container > .select-container {
+.projects-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     margin: 0px 6%;
 
-    border: 4px solid black;
+    /* border: 4px solid black; */
 }
 
-.dashboard-container > .select-container > button {
-    background-color: rgb(155, 154, 209);
+.projects-container > button,
+.projects-container > form {
     margin: 2%;
-    width: auto;
-    height: 110px;
+    height: 100px;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    background-color: #7E69FC;
+    border: none;
+    color: black;
+    font-weight: 800;
+    font-size: 2vh;
+}
+
+.projects-container > form,
+.projects-container > form > input,
+.projects-container > form > button  {
+    background-color: rgb(199, 199, 199);
+}
+
+.projects-container > form > input  {
+    width: 90%;
+    height: 50%;
+    margin-left: 8%;
     border: none;
 }
 
-
-.start-button {
-    background-color: rgb(17, 119, 3);
+.projects-container > form > button  {
+    width: 90%;
+    height: 50%;
 }
 
-.stop-button {
-    background-color: rgb(255, 0, 0);
-}
+
 
 
 
