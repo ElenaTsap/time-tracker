@@ -1,8 +1,8 @@
-import './Login.css';
+import './Auth.css';
 import { useState } from 'react';
+import ApiToGo from "api-to-go"
 
-const Login = ({users, loginSetter, userSetter}) => {
-    const [loggedIn, setLoggedIn] = useState(false);
+const Auth = ({/* users, */ loggedIn, setLoggedIn, userSetter}) => {
     const [userName, setUserName] = useState(null);
     const [pass, setPass] = useState(null);
 
@@ -13,7 +13,6 @@ const Login = ({users, loginSetter, userSetter}) => {
         for (let i = 0; i < users.length; i++) {
             if (userName === users[i].userName && pass === users[i].password) {
                 setLoggedIn(true);
-                loginSetter(true);
                 userSetter(userName);
                 return;
             } 
@@ -29,13 +28,12 @@ const Login = ({users, loginSetter, userSetter}) => {
             } 
         } 
 
-        users.push({
+/*         users.push({
             userName: userName,
             password: pass
-        })
+        }) */
 
         setLoggedIn(true);
-        loginSetter(true);
         userSetter(userName);
     }
 
@@ -50,7 +48,8 @@ const Login = ({users, loginSetter, userSetter}) => {
                     <input type='text' placeholder='password' onChange={(e)=>setPass(e.target.value)}/>
                     <button type='submit'>Log in</button> 
                 </form>
-                <h4>New user?</h4>
+                
+                <h4>New user? Register here</h4>
                 <button id='register-button' onClick={registrationHandler}>Register</button>
             </div>
             }
@@ -58,4 +57,4 @@ const Login = ({users, loginSetter, userSetter}) => {
     )
 }
 
-export default Login
+export default Auth

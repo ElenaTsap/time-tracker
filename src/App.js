@@ -1,43 +1,43 @@
 import './App.css';
-import Login from './components/Login';
-import Dashboard from './components/Dashboard'
-import { useState } from 'react';
-
-
-let users = [
-  {
-    userName: 'Mario',
-    password: '123'
-  },
-  {
-    userName: 'Luigi',
-    password: '456'
-  }
-]
+import Login from './pages/Login';
+import Register from './pages/Register'
+import Dashboard from './pages/Dashboard'
+import { useState, useEffect } from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom'
 
 function App() {
 const [currentUser, setCurrentUser] = useState(null);
 const [loggedIn, setLoggedIn] = useState(false);
+const [registered, setRegistered] = useState(false);
 
-
-const currentUserHandler = (userName) => {
-  setCurrentUser(userName);
-  console.log('currentUser', currentUser);
-}
-
-const loginSetter = (isLoggedIn) => {
-  setLoggedIn(isLoggedIn);
-}
-
+useEffect(() => {
+  const token = localStorage.getItem('api-to-go');
+  if (token !== null) {
+    setLoggedIn(true);
+  }
+}, [])
 
   return (
     <div className="App">
-      {
-        loggedIn ?
-        <Dashboard currentUser = {currentUser} setLoggedIn = {setLoggedIn}/>
-        :<Login users = {users} userSetter = {currentUserHandler} loginSetter = {loginSetter}/>
-      }
-
+      <Switch>
+        <Route exact path='/'>
+          {
+            loggedIn ?
+            <Dashboard 
+              currentUser = {currentUser} 
+              setLoggedIn = {setLoggedIn}
+            />
+            :<Login 
+              setCurrentUser = {setCurrentUser} 
+              loggedIn = {loggedIn} 
+              setLoggedIn = {setLoggedIn}
+              />
+          }
+        </Route>
+        <Route exact path='/register'>
+            {registered ? <Redirect to="/" /> : <Register setRegistered={setRegistered}/>}
+        </Route>
+      </Switch>
     </div>
   );
 }

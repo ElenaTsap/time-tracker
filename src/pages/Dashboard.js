@@ -1,21 +1,16 @@
 import './Dashboard.css'
-import Header from './Header'
+import Header from '../components/Header'
 import CurrentProject from '../components/CurrentProject'
 import Projects from './Projects';
-import ProjectCard from '../components/ProjectCard'
 import Logs from './Logs';
-import Navbar from './Navbar'
+import Navbar from '../components/Navbar'
 import { useState } from 'react';
-
 import { Route, Switch } from 'react-router-dom'
-
-import React from 'react'
 
 
 const Dashboard = ({currentUser, setLoggedIn}) => {
     const [currentProject, setCurrentProject] = useState(null);
-    const [newProject, setNewProject] = useState('')
-    const [logData, setLogData] = useState([
+    const [logData, setLogData] = useState([/* 
         {
             projectName:'Eleni project 1',
             userName:'Eleni',
@@ -51,76 +46,14 @@ const Dashboard = ({currentUser, setLoggedIn}) => {
             userName:'Eleni',
             startDate: 'Wed Mar 31 2021',
             logDurationSec:40
-        },
+        }, */
     ])
-
-    const timeFormatter = (totalSeconds) => {
-        let seconds = ((totalSeconds)%60);
-        let minutes =  (Math.floor(totalSeconds/60)%60);
-        let hours = (Math.floor(totalSeconds/3600));
-
-        if (minutes <= 9) {
-            if (seconds <= 9) {
-                return (`${hours}:0${minutes}:0${seconds}`)
-            } else {
-                return (`${hours}:0${minutes}:${seconds}`)
-            }
-        } else {
-            if (seconds <= 9) {
-                return (`${hours}:${minutes}:0${seconds}`)
-            } else {
-                return (`${hours}:${minutes}:${seconds}`)
-            }
-        }
-    }
 
     const dateFormatter = () => {
         const timeElapsed = Date.now();
         const today = new Date(timeElapsed);
         let displayDate = today.toDateString();
         return displayDate;
-    }
-
-    const currentUserProjectsArray = logData.filter(log => log.userName === currentUser)
-
-    const totalProjectTimes = [];
-
-    currentUserProjectsArray.forEach(project => {
-        let foundProject = totalProjectTimes.find(totalProject => {
-            return totalProject.projectName === project.projectName
-        })
-        if (foundProject !== undefined) {
-            foundProject.totalDurationSec += project.logDurationSec;
-        } else {
-            totalProjectTimes.push({projectName: project.projectName, startDate: project.startDate, totalDurationSec: project.logDurationSec})
-        }
-    })
-
-    const currentUserProjects = totalProjectTimes.map((item,index) =>
-        <ProjectCard 
-            key = {index}
-            item = {item} 
-            setCurrentProject = {setCurrentProject} 
-            timeFormatter = {timeFormatter}
-        />
-        );
-    
-    const addProject = (e) => {
-        e.preventDefault();
-
-        if (!newProject) {
-            alert('please add a task')
-            return
-        }
-
-        setLogData([...logData, {
-            projectName: newProject,
-            userName: currentUser,
-            startDate: dateFormatter(),
-            logDurationSec:0
-        }])
-
-        console.log(logData);
     }
 
     return (
@@ -142,9 +75,10 @@ const Dashboard = ({currentUser, setLoggedIn}) => {
                 <Switch>
                     <Route path='/projects'>
                         <Projects
-                        addProject = {addProject}
-                        setNewProject = {setNewProject}
-                        currentUserProjects = {currentUserProjects}
+                        currentUser={currentUser} 
+                        setCurrentProject = {setCurrentProject} 
+                        dataState = {{'logData': logData, 'setLogData': setLogData}}
+                        dateFormatter = {dateFormatter}
                         />
                     </Route>
                     <Route path='/logs'>
