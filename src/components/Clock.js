@@ -27,7 +27,6 @@ const Clock = ({ currentProject, currentUser, dataState, dateFormatter }) => {
     useEffect(() => {
         if (timerOn === true) {
             setTimeout(function() {setTotalSeconds((totalSeconds + 1));}, 1000)
-            console.log(totalSeconds);
             setSeconds((totalSeconds + 1)%60);
             setMinutes(Math.floor(totalSeconds/60)%60);
             setHours(Math.floor(totalSeconds/3600));

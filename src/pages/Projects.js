@@ -1,8 +1,14 @@
 import ProjectCard from '../components/ProjectCard'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const Projects = ({ dataState, dateFormatter, currentUser, setCurrentProject }) => {
+const Projects = ({ logData, setLogData, dateFormatter, currentUser, setCurrentProject }) => {
     const [newProject, setNewProject] = useState('')
+
+/*     useEffect(() => {
+        if (logData === undefined) {
+            setLogData([]);
+        }
+        }, []) */
 
     const timeFormatter = (totalSeconds) => {
         let seconds = ((totalSeconds)%60);
@@ -32,7 +38,7 @@ const Projects = ({ dataState, dateFormatter, currentUser, setCurrentProject }) 
             return
         }
     
-        dataState.setLogData([...dataState.logData, {
+        setLogData([...logData, {
             projectName: newProject,
             userName: currentUser,
             startDate: dateFormatter,
@@ -41,8 +47,9 @@ const Projects = ({ dataState, dateFormatter, currentUser, setCurrentProject }) 
     
         setNewProject('');
     }
-    
-    const currentUserProjectsArray = dataState.logData.filter(log => log.userName === currentUser)
+
+
+    const currentUserProjectsArray = logData.filter(log => log.userName === currentUser)
     
     const totalProjectTimes = [];
     

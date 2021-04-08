@@ -11,44 +11,7 @@ import ApiToGo from "api-to-go"
 
 const Dashboard = ({currentUser, setLoggedIn}) => {
     const [currentProject, setCurrentProject] = useState(null);
-    const [logData, setLogData] = useState([/* 
-        {
-            projectName:'Eleni project 1',
-            userName:'Eleni',
-            startDate: 'Wed Mar 31 2021',
-            logDurationSec:20
-        },
-        {
-            projectName:'Marios project',
-            userName:'Mario',
-            startDate: 'Wed Mar 31 2021',
-            logDurationSec:50
-        },
-        {
-            projectName:'Eleni project 2',
-            userName:'Eleni',
-            startDate: 'Wed Mar 31 2021',
-            logDurationSec:10
-        },
-        {
-            projectName:'Luigi project 6',
-            userName:'Luigi',
-            startDate: 'Wed Mar 31 2021',
-            logDurationSec:60
-        },
-        {
-            projectName:'Luigi project 6',
-            userName:'Luigi',
-            startDate: 'Wed Mar 31 2021',
-            logDurationSec:40
-        },
-        {
-            projectName:'Eleni project 2',
-            userName:'Eleni',
-            startDate: 'Wed Mar 31 2021',
-            logDurationSec:40
-        }, */
-    ])
+    const [logData, setLogData] = useState([])
 
     const dateFormatter = () => {
         const timeElapsed = Date.now();
@@ -57,14 +20,31 @@ const Dashboard = ({currentUser, setLoggedIn}) => {
         return displayDate;
     }
 
-    useEffect(() => {
+/*     useEffect(() => {
         const getLogData = async () => {
-            const logs = await ApiToGo.get()
-            setLogData(logs)
-            console.log(logs);
+            const res = await ApiToGo.get();
+            if (res === undefined) {
+                alert('hey!')
+                return
+            }
+            setLogData(res);
+            console.log('res from GET', res);
         }
         getLogData()
-        }, [])
+        }, []) */
+
+        useEffect(() => {
+            const getLogData = async () => {
+                const res = await ApiToGo
+                .get()
+                .then(res => {
+                    console.log('resres',res); 
+                    setLogData(res);                 
+                })
+                .catch(error => {console.log(error)});
+            }
+            getLogData()
+        }, []) 
 
 /*     useEffect(() => {
     ApiToGo.get()
@@ -73,8 +53,8 @@ const Dashboard = ({currentUser, setLoggedIn}) => {
     }, []); */
 
     useEffect(() => {
-        ApiToGo.post(...logData)
-                .then(res => {console.log(res);})
+        ApiToGo.post([...logData])
+                .then(res => {console.log(res); console.log(...logData);})
                 .catch(error => {console.log(error)});
         }, [logData]);
 
@@ -100,7 +80,8 @@ const Dashboard = ({currentUser, setLoggedIn}) => {
                         <Projects
                         currentUser={currentUser} 
                         setCurrentProject = {setCurrentProject} 
-                        dataState = {{'logData': logData, 'setLogData': setLogData}}
+                        logData = {logData}
+                        setLogData = {setLogData}
                         dateFormatter = {dateFormatter}
                         />
                     </Route>
