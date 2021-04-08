@@ -29,7 +29,6 @@ useEffect(() => {
             />
             :<Login 
               setCurrentUser = {setCurrentUser} 
-              loggedIn = {loggedIn} 
               setLoggedIn = {setLoggedIn}
               />
           }

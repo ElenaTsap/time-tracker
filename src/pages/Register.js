@@ -9,14 +9,13 @@ const Auth = ({setRegistered}) => {
 
     const registrationHandler = (e) => {
         e.preventDefault();
-        ApiToGo.register(email, pass).then(output =>
+        ApiToGo.register(email, pass).then(res =>
             {
-                if (output === 'success') {
+                if (res === 'success') {
                     setRegistered(true);
-                    console.log('output', output);
+                    console.log('res', res);
                 }
-            });
-            alert(email);
+            }).catch(error => {alert(error)});
     }
 
     return (

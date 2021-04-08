@@ -3,22 +3,22 @@ import { useState } from 'react';
 import ApiToGo from "api-to-go"
 import {NavLink} from "react-router-dom";
 
-const Auth = ({ setLoggedIn, setCurrentUser, setToken}) => {
+const Auth = ({ setLoggedIn, setCurrentUser }) => {
     const [email, setEmail] = useState(null);
     const [pass, setPass] = useState(null);
 
     const loginHandler = (e) => {
         e.preventDefault();
 
-        ApiToGo.login(email, pass).then(output =>
+        ApiToGo.login(email, pass).then(res =>
             {
-                console.log('output', output);
-                if (output !== null) {
+                console.log('res', res);
+                if (res !== null) {
                     console.log('loggedIN!');
                     setLoggedIn(true);
                     setCurrentUser(email);
                 }
-            });
+            }).catch(error => {alert(error)});
     }
 
     return (
@@ -30,7 +30,6 @@ const Auth = ({ setLoggedIn, setCurrentUser, setToken}) => {
                     <input type='text' placeholder='password' onChange={(e)=>setPass(e.target.value)}/>
                     <button type='submit'>Log in</button> 
                 </form>
-                
                 <h4>New user? <NavLink exact to = "/register">Register</NavLink></h4>
             </div>
         </section>

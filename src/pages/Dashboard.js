@@ -4,8 +4,9 @@ import CurrentProject from '../components/CurrentProject'
 import Projects from './Projects';
 import Logs from './Logs';
 import Navbar from '../components/Navbar'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom'
+import ApiToGo from "api-to-go"
 
 
 const Dashboard = ({currentUser, setLoggedIn}) => {
@@ -56,6 +57,28 @@ const Dashboard = ({currentUser, setLoggedIn}) => {
         return displayDate;
     }
 
+    useEffect(() => {
+        const getLogData = async () => {
+            const logs = await ApiToGo.get()
+            setLogData(logs)
+            console.log(logs);
+        }
+        getLogData()
+        }, [])
+
+/*     useEffect(() => {
+    ApiToGo.get()
+            .then(res => {console.log(res);})
+            .catch(error => {console.log(error)});
+    }, []); */
+
+    useEffect(() => {
+        ApiToGo.post(...logData)
+                .then(res => {console.log(res);})
+                .catch(error => {console.log(error)});
+        }, [logData]);
+
+
     return (
             <div className = 'dashboard-container'>
                 <Header
@@ -73,7 +96,7 @@ const Dashboard = ({currentUser, setLoggedIn}) => {
                 <Navbar/>
 
                 <Switch>
-                    <Route path='/projects'>
+                    <Route path='/'>
                         <Projects
                         currentUser={currentUser} 
                         setCurrentProject = {setCurrentProject} 
