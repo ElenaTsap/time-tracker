@@ -3,31 +3,44 @@
     flex-direction: column;
     height: 80%;
     text-align: left;
-    padding: 40px;
 }
 
-#form-container {
+.form-container {
     display: flex;
     flex-direction: column;
 }
 
-#form-container > input {
+.form-container > input {
     margin: 2% 0;
+    height: 36px;
+    border-radius: 8px;
+    border: 2px solid black;
 }
 
-#form-container > button {
+.form-container > button {
     background-color: #000000;
     height: 36px;
-    border-radius: 4px;
+    border-radius: 8px;
     border: none;
     color: white;
+    font-weight: 600;
+    margin: 4% 0;
+
+    -webkit-box-shadow: 4px 4px 0px 0px #BEBEB6;
+    -moz-box-shadow: 4px 4px 0px 0px #BEBEB6;
+    box-shadow: 4px 4px 0px 0px #BEBEB6;
 }
 
-#register-button {
-    background-color: #6C549B;
-    height: 36px;
-    border-radius: 4px;
-    border: none;
-    color: white;
-    width: 100%;
+.form-container > button:hover {
+    padding-bottom: 2%;
+    cursor: pointer;
 }
+
+.form-container > button:active {
+    color: #FFBF38;
+}
+
+.nav-link{
+    color: #3080D7;
+}
+

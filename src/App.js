@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 function App() {
-const [currentUser, setCurrentUser] = useState(null);
+const [currentUser, setCurrentUser] = useState(localStorage.getItem('current-user'));
 const [loggedIn, setLoggedIn] = useState(false);
 const [registered, setRegistered] = useState(false);
 

@@ -1,14 +1,8 @@
 import ProjectCard from '../components/ProjectCard'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-const Projects = ({ logData, setLogData, dateFormatter, currentUser, setCurrentProject }) => {
+const Projects = ({ logData, setLogData, dateFormatter, currentUser, currentProject, setCurrentProject, timerOn, timerHandler }) => {
     const [newProject, setNewProject] = useState('')
-
-/*     useEffect(() => {
-        if (logData === undefined) {
-            setLogData([]);
-        }
-        }, []) */
 
     const timeFormatter = (totalSeconds) => {
         let seconds = ((totalSeconds)%60);
@@ -42,18 +36,15 @@ const Projects = ({ logData, setLogData, dateFormatter, currentUser, setCurrentP
             projectName: newProject,
             userName: currentUser,
             startDate: dateFormatter,
-            logDurationSec:0
+            logDurationSec: 0
         }])
     
         setNewProject('');
     }
-
-
-    const currentUserProjectsArray = logData.filter(log => log.userName === currentUser)
     
     const totalProjectTimes = [];
     
-    currentUserProjectsArray.forEach(project => {
+    logData.forEach(project => {
         let foundProject = totalProjectTimes.find(totalProject => {
             return totalProject.projectName === project.projectName
         })
@@ -68,8 +59,11 @@ const Projects = ({ logData, setLogData, dateFormatter, currentUser, setCurrentP
         <ProjectCard 
             key = {index}
             item = {item} 
+            currentProject = {currentProject}
             setCurrentProject = {setCurrentProject} 
             timeFormatter = {timeFormatter}
+            timerOn = {timerOn}
+            timerHandler = {timerHandler}
         />
         );
 
@@ -80,7 +74,7 @@ const Projects = ({ logData, setLogData, dateFormatter, currentUser, setCurrentP
                     type="text" 
                     value={newProject} 
                     onChange={(e)=>setNewProject(e.target.value)}/>
-                <button type="submit">Add</button>
+                <input type="submit"/>
             </form>
             {currentUserProjects}
         </section>

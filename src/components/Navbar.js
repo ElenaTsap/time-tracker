@@ -1,5 +1,5 @@
 import {NavLink} from "react-router-dom";
-
+import './Navbar.css'
 import React from 'react'
 
 const Navbar = () => {
@@ -9,7 +9,7 @@ const Navbar = () => {
                 exact
                 className = "nav-item"
                 activeClassName = "active"
-                to = "/projects"
+                to = "/"
             >
                 Projects
             </NavLink>

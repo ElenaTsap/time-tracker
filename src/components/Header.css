@@ -1,0 +1,25 @@
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    background-color: #121317;
+    color: white;
+    padding: 18px 32px;
+    font-size: 1rem;
+}
+
+.header-container > h3,
+.header-container > button {
+    font-weight: 600;
+}
+
+.header-container > h3 > span {
+    color: #AEE8F1;
+}
+
+.header-container > button {
+    background-color: #121317;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    text-decoration: underline;
+}

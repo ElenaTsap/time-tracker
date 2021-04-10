@@ -2,7 +2,7 @@ import Clock from '../components/Clock'
 import './CurrentProject.css'
 
 
-const CurrentProject = ({ currentProject, currentUser, dataState, dateFormatter}) => {
+const CurrentProject = ({ currentProject, timerOn, timerHandler, totalSeconds, setTotalSeconds}) => {
     return (
         <section className='current-project-container'>
             {
@@ -14,10 +14,10 @@ const CurrentProject = ({ currentProject, currentUser, dataState, dateFormatter}
                 :   <div className='current-project-card'>
                         <h3>{currentProject}</h3>
                         <Clock 
-                            currentProject = {currentProject}
-                            currentUser={currentUser}
-                            dataState = {dataState}
-                            dateFormatter = {dateFormatter}
+                            timerOn = {timerOn}
+                            timerHandler ={timerHandler}
+                            totalSeconds = {totalSeconds}
+                            setTotalSeconds = {setTotalSeconds}
                         />
                     </div>
             }

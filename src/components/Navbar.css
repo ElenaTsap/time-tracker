@@ -1,0 +1,31 @@
+nav {
+    width: 86%;
+    margin: 1% 6%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.nav-item {
+    border: 4px solid black;
+    margin-right: 12px;
+    padding: 4px;
+    text-decoration: none;
+    font-weight: 600;
+   /*  border-radius: 8px; */
+}
+.nav-item:visited {
+    color: black;
+}
+
+.nav-item:hover {
+    color: #3080D7;
+    border: 4px solid #3080D7;
+}
+
+.active {
+    border: 4px solid #BEBEB6;
+    color: #BEBEB6;
+}
+

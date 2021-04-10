@@ -17,6 +17,7 @@ const Auth = ({ setLoggedIn, setCurrentUser }) => {
                     console.log('loggedIN!');
                     setLoggedIn(true);
                     setCurrentUser(email);
+                    localStorage.setItem('current-user', email);
                 }
             }).catch(error => {alert(error)});
     }
@@ -24,13 +25,13 @@ const Auth = ({ setLoggedIn, setCurrentUser }) => {
     return (
         <section className='login-container'>
             <div>
-                <h1>Login</h1>
-                <form id='form-container' onSubmit={loginHandler}>
+                <h1>Log In</h1>
+                <form className='form-container' onSubmit={loginHandler}>
                     <input type='email' placeholder='email' onChange={(e)=>setEmail(e.target.value)}/> <br/>
                     <input type='text' placeholder='password' onChange={(e)=>setPass(e.target.value)}/>
-                    <button type='submit'>Log in</button> 
+                    <button type='submit'>LOG IN</button> 
                 </form>
-                <h4>New user? <NavLink exact to = "/register">Register</NavLink></h4>
+                <h4>New user? <NavLink exact to = "/register" className ='nav-link'>Register</NavLink></h4>
             </div>
         </section>
     )

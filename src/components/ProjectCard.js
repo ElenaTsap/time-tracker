@@ -1,10 +1,30 @@
-const ProjectCard = ({ item, setCurrentProject, timeFormatter }) => {
+const ProjectCard = ({ item, currentProject, setCurrentProject, timeFormatter, timerOn, timerHandler }) => {
+/*     const getRandomColor = () => {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    } */
+
+    const activeProjectChecker = (project) => {
+        if (timerOn === true) {
+            if (window.confirm(`Stop tracking ${currentProject}?`)) {
+                timerHandler();
+                setCurrentProject(project)
+            }
+        } else {
+            setCurrentProject(project)
+        }
+    }
+
     return (
-        <button onClick={(e)=>setCurrentProject(item.projectName)}>
+        <div onClick={(e)=> activeProjectChecker(item.projectName)} className= {`project-card ${(item.projectName === currentProject) && 'selected'}`}>
             <div className='project-name'>{item.projectName}</div>
-            <div className='project-name'>started: {item.startDate}</div>
-            <div className='project-time'>total time: {timeFormatter(item.totalDurationSec)}</div>
-        </button>
+            <div className='project-date'>started: {item.startDate}</div>
+            <div className='project-time'>{timeFormatter(item.totalDurationSec)}</div>
+        </div>
     )
 }
 

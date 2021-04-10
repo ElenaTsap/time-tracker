@@ -22,12 +22,12 @@ const Auth = ({setRegistered}) => {
         <section className='login-container'>
             <div>
                 <h1>Register</h1>
-                <form id='form-container' onSubmit={registrationHandler}>
+                <form className='form-container' onSubmit={registrationHandler}>
                     <input type='email' placeholder='email' onChange={(e)=>setEmail(e.target.value)}/> <br/>
                     <input type='text' placeholder='password' onChange={(e)=>setPass(e.target.value)}/>
                     <button type='submit'>Register</button> 
                 </form>
-                <h4>Already a user? <NavLink exact to = "/">Login</NavLink></h4>
+                <h4>Already a user? <NavLink exact to = "/" className ='nav-link'>Login</NavLink></h4>
             </div>
         </section>
     )
