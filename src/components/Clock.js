@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 
 const Clock = ({ timerOn, timerHandler, totalSeconds, setTotalSeconds }) => {
-    
-    
     const [seconds, setSeconds] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const [hours, setHours] = useState(0);

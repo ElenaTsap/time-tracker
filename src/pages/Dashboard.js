@@ -23,6 +23,26 @@ const Dashboard = ({currentUser, setLoggedIn}) => {
         return displayDate;
     }
 
+    const timeFormatter = (totalSeconds) => {
+        let seconds = ((totalSeconds)%60);
+        let minutes =  (Math.floor(totalSeconds/60)%60);
+        let hours = (Math.floor(totalSeconds/3600));
+
+        if (minutes <= 9) {
+            if (seconds <= 9) {
+                return (`${hours}:0${minutes}:0${seconds}`)
+            } else {
+                return (`${hours}:0${minutes}:${seconds}`)
+            }
+        } else {
+            if (seconds <= 9) {
+                return (`${hours}:${minutes}:0${seconds}`)
+            } else {
+                return (`${hours}:${minutes}:${seconds}`)
+            }
+        }
+    }
+
     useEffect(() => {
         ApiToGo.get().then(res =>
             {
@@ -43,7 +63,7 @@ const Dashboard = ({currentUser, setLoggedIn}) => {
                 setLogData([...logData, {
                     projectName: currentProject,
                     userName: currentUser,
-                    startDate: dateFormatter,
+                    startDate: dateFormatter(),
                     logDurationSec:totalSeconds
                 }]);
             }
@@ -97,10 +117,14 @@ const Dashboard = ({currentUser, setLoggedIn}) => {
                             setCurrentProject = {setCurrentProject} 
                             timerOn = {timerOn}
                             timerHandler = {timerHandler}
+                            timeFormatter = {timeFormatter}
                         />
                     </Route>
-                    <Route path='/logs'>
-                        <Logs/>
+                    <Route exact path='/logs'>
+                        <Logs
+                            logData = {logData}
+                            timeFormatter = {timeFormatter}
+                        />
                     </Route>
                 </Switch>
             </div>

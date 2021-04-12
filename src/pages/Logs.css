@@ -1,0 +1,34 @@
+.logs-container {
+    border: 4px solid black;
+    margin: 0px 6%;
+    height: 60%;
+    width: 86%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.logs-container > table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.logs-container > table > tr {
+    border-bottom: 4px solid black;
+}
+
+.logs-container > table > tr:nth-of-type(1){
+    background-color: #FFBF38;
+    /* position: sticky; */
+}
+
+.logs-container > table > tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.logs-container > table > tr> td,
+.logs-container > table > tr> th {
+    text-align: left;
+    padding: 20px;
+}
+
+

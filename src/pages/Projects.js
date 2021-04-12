@@ -1,28 +1,8 @@
 import ProjectCard from '../components/ProjectCard'
 import { useState } from 'react';
 
-const Projects = ({ logData, setLogData, dateFormatter, currentUser, currentProject, setCurrentProject, timerOn, timerHandler }) => {
+const Projects = ({ logData, setLogData, dateFormatter, currentUser, currentProject, setCurrentProject, timerOn, timerHandler, timeFormatter }) => {
     const [newProject, setNewProject] = useState('')
-
-    const timeFormatter = (totalSeconds) => {
-        let seconds = ((totalSeconds)%60);
-        let minutes =  (Math.floor(totalSeconds/60)%60);
-        let hours = (Math.floor(totalSeconds/3600));
-
-        if (minutes <= 9) {
-            if (seconds <= 9) {
-                return (`${hours}:0${minutes}:0${seconds}`)
-            } else {
-                return (`${hours}:0${minutes}:${seconds}`)
-            }
-        } else {
-            if (seconds <= 9) {
-                return (`${hours}:${minutes}:0${seconds}`)
-            } else {
-                return (`${hours}:${minutes}:${seconds}`)
-            }
-        }
-    }
 
     const addProject = (e) => {
         e.preventDefault();
@@ -35,7 +15,7 @@ const Projects = ({ logData, setLogData, dateFormatter, currentUser, currentProj
         setLogData([...logData, {
             projectName: newProject,
             userName: currentUser,
-            startDate: dateFormatter,
+            startDate: dateFormatter(),
             logDurationSec: 0
         }])
     
@@ -65,7 +45,8 @@ const Projects = ({ logData, setLogData, dateFormatter, currentUser, currentProj
             timerOn = {timerOn}
             timerHandler = {timerHandler}
         />
-        );
+    );
+
 
     return (
         <section className = 'projects-container'>
