@@ -9,7 +9,7 @@ const Navbar = () => {
                 exact
                 className = "nav-item"
                 activeClassName = "active"
-                to = "/"
+                to = "/projects"
             >
                 Projects
             </NavLink>

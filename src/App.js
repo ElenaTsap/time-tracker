@@ -20,7 +20,10 @@ useEffect(() => {
   return (
     <div className="App">
       <Switch>
-        <Route exact path='/'>
+        <Route exact path='/register'>
+            {registered ? <Redirect to="/" /> : <Register setRegistered={setRegistered}/>}
+        </Route>
+        <Route path='/'>
           {
             loggedIn ?
             <Dashboard 
@@ -33,9 +36,7 @@ useEffect(() => {
               />
           }
         </Route>
-        <Route exact path='/register'>
-            {registered ? <Redirect to="/" /> : <Register setRegistered={setRegistered}/>}
-        </Route>
+
       </Switch>
     </div>
   );

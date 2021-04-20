@@ -107,7 +107,19 @@ const Dashboard = ({currentUser, setLoggedIn}) => {
                 <Navbar/>
 
                 <Switch>
-                    <Route exact path='/'>
+
+                    <Route exact path='/logs'>
+                        <Logs
+                            logData = {logData}
+                            timeFormatter = {timeFormatter}
+                        />
+                    </Route>
+
+                    <Route exact path='/charts'>
+                        lol
+                    </Route>
+
+                    <Route path='/'>
                         <Projects
                             logData = {logData}
                             setLogData = {setLogData}
@@ -117,12 +129,6 @@ const Dashboard = ({currentUser, setLoggedIn}) => {
                             setCurrentProject = {setCurrentProject} 
                             timerOn = {timerOn}
                             timerHandler = {timerHandler}
-                            timeFormatter = {timeFormatter}
-                        />
-                    </Route>
-                    <Route exact path='/logs'>
-                        <Logs
-                            logData = {logData}
                             timeFormatter = {timeFormatter}
                         />
                     </Route>
