@@ -3,13 +3,14 @@
     justify-content: space-between;
     background-color: #121317;
     color: white;
-    padding: 18px 32px;
     font-size: 1rem;
+    width: 100%;
 }
 
 .header-container > h3,
 .header-container > button {
     font-weight: 600;
+    padding: 18px 32px;
 }
 
 .header-container > h3 > span {

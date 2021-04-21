@@ -2,7 +2,7 @@
     border: 4px solid black;
     margin: 0px 6%;
     height: 60%;
-    width: 86%;
+    width: 900px;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -25,10 +25,32 @@
     background-color: #dddddd;
 }
 
-.logs-container > table > tr> td,
-.logs-container > table > tr> th {
+.logs-container > table > tr:nth-child(odd) {
+    background-color: #a7a7a7;
+}
+
+.logs-container > table > tr > th {
+    background-color: #000000;
+    color: white;
+}
+
+.logs-container > table > tr > th {
     text-align: left;
     padding: 20px;
+}
+
+.logs-container > table > tr > td {
+    text-align: left;
+    padding: 14px;
+}
+
+@media only screen and (max-width: 960px) {
+
+    .logs-container {
+        width: 450px;
+        font-size: 0.8rem;
+        font-weight: 400;
+    }
 }
 
 

@@ -1,43 +1,36 @@
+.current-project-container {
+    width: 1250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .current-project-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #FF5837;
-    width: 86%;
-    margin: 6% 6%;
-    padding: 2% 0%;
-    height: 30px;
+    width: 70%;
+    font-size: 1rem;
+    padding: 0px 10px;
+    margin-top: 5%;
     border: 4px solid black;
-    /* border-radius: 12px; */
 }
 
 .no-project {
     background-color: #BEBEB6;
 }
 
-.current-project-card > h3 {
-    margin-left: 4%;
-}
-
 .time-container {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 20%;
-    margin: 0 20px;
-
+    /* width: 24px; */
 }
 
 .time-container > button {
-    margin-left: auto;
+    margin-left: 12px;
     cursor: pointer;
-}
-.start-button {
-    background-color: rgb(17, 119, 3);
-}
-
-.stop-button {
-    background-color: #FFBF38;
 }
 
 .start-button,
@@ -47,4 +40,28 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
+}
+
+.start-button {
+    background-color: rgb(17, 119, 3);
+}
+
+.stop-button {
+    background-color: #FFBF38;
+}
+
+@media only screen and (max-width: 960px) {
+    .current-project-container {
+        width: 600px;
+    }
+
+    .current-project-card {
+        font-size: 0.8rem;
+    }
+
+    .start-button,
+    .stop-button {
+        width: 35px;
+        height: 35px;
+    }
 }

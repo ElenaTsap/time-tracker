@@ -1,4 +1,5 @@
 import ProjectCard from '../components/ProjectCard'
+import './Projects.css'
 import { useState } from 'react';
 
 const Projects = ({ logData, setLogData, dateFormatter, currentUser, currentProject, setCurrentProject, timerOn, timerHandler, timeFormatter }) => {
@@ -50,6 +51,7 @@ const Projects = ({ logData, setLogData, dateFormatter, currentUser, currentProj
 
     return (
         <section className = 'projects-container'>
+            {currentUserProjects}
             <form onSubmit = {addProject}>
                 <input 
                     type="text" 
@@ -57,7 +59,7 @@ const Projects = ({ logData, setLogData, dateFormatter, currentUser, currentProj
                     onChange={(e)=>setNewProject(e.target.value)}/>
                 <input type="submit"/>
             </form>
-            {currentUserProjects}
+
         </section>
     )
 }

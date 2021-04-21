@@ -2,7 +2,7 @@ import Clock from '../components/Clock'
 import './CurrentProject.css'
 
 
-const CurrentProject = ({ currentProject, timerOn, timerHandler, totalSeconds, setTotalSeconds}) => {
+const CurrentProject = ({ currentProject, timerOn, timerHandler, totalSeconds, setTotalSeconds }) => {
     return (
         <section className='current-project-container'>
             {
