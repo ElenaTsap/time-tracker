@@ -20,11 +20,12 @@ nav {
 
 .nav-item:hover {
     color: black;
-    border: 4px solid #3080D7;
+    border: 4px solid #FF5837;
 }
 
 .active {
-    border: 4px solid #3080D7;
+    border: 4px solid black;
+    background-color: #FF5837;
     color: black;
 }
 

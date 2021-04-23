@@ -24,8 +24,8 @@ const ProjectCard = ({ item, currentProject, setCurrentProject, timeFormatter, t
     return (
         <div onClick={(e)=> activeProjectChecker(item.projectName)} className= {`project-card ${(item.projectName === currentProject) && 'selected'}`}>
             <div className='project-name'>{item.projectName}</div>
-            <div className='project-date'>last tracked: {item.startDate}</div>
             <div className='project-date'>started: {item.startDate}</div>
+            <div className='project-date'>last tracked: {item.lastTrackedDate}</div>
             <div className='project-time'>{timeFormatter(item.totalDurationSec)}</div>
         </div>
     )
