@@ -2,7 +2,7 @@ import ProjectCard from '../components/ProjectCard'
 import './Projects.css'
 import { useState } from 'react';
 
-const Projects = ({ logData, setLogData, dateFormatter, currentUser, currentProject, setCurrentProject, totalProjectTimes, timerOn, timerHandler, timeFormatter }) => {
+const Projects = ({ logData, setLogData, dateFormatter, currentUser, currentProject, setCurrentProject, totalProjectTimes, timerOn, timeFormatter }) => {
     const [newProject, setNewProject] = useState('')
 
     const addProject = (e) => {
@@ -34,7 +34,6 @@ const Projects = ({ logData, setLogData, dateFormatter, currentUser, currentProj
             setCurrentProject = {setCurrentProject} 
             timeFormatter = {timeFormatter}
             timerOn = {timerOn}
-            timerHandler = {timerHandler}
         />
     );
 

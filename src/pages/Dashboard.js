@@ -8,13 +8,14 @@ import Navbar from '../components/Navbar'
 import { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom'
 import ApiToGo from "api-to-go"
-
+import {ContextCreator} from '../MyContext'
+import {useContext} from 'react'
 
 const Dashboard = ({currentUser, setLoggedIn}) => {
+    const context = useContext(ContextCreator);
     const [currentProject, setCurrentProject] = useState(null);
     const [logData, setLogData] = useState([]);
     const [timerOn, setTimerOn] = useState(false);
-    const [totalSeconds, setTotalSeconds] = useState(0);
     const [startTime, setStartTime] = useState(null)
 
     
@@ -86,7 +87,7 @@ const Dashboard = ({currentUser, setLoggedIn}) => {
                     startDate: dateFormatter(),
                     startTime: startTime,
                     endTime: getTime(),
-                    logDurationSec:totalSeconds
+                    logDurationSec:context.totalSeconds
                 }]);
                 setStartTime(null)
             }
@@ -133,14 +134,14 @@ const totalProjectTimes = [];
                     currentUser={currentUser} 
                     setLoggedIn={setLoggedIn}
                 />
+                
 
                 <CurrentProject 
                     currentProject = {currentProject} 
                     timerOn = {timerOn}
                     timerHandler = {timerHandler}
-                    totalSeconds = {totalSeconds}
-                    setTotalSeconds = {setTotalSeconds}
                 />
+
 
                 <Navbar/>
 

@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import { FaPlay, FaPause } from 'react-icons/fa';
+import {ContextCreator} from '../MyContext'
+import {useContext} from 'react'
 
-const Clock = ({ timerOn, timerHandler, totalSeconds, setTotalSeconds }) => {
+const Clock = ({ timerOn, timerHandler }) => {
+    const context = useContext(ContextCreator);
+
     const [seconds, setSeconds] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const [hours, setHours] = useState(0);
@@ -25,20 +29,20 @@ const Clock = ({ timerOn, timerHandler, totalSeconds, setTotalSeconds }) => {
 
     useEffect(() => {
         if (timerOn === true) {
-            setTimeout(function() {setTotalSeconds((totalSeconds + 1));}, 1000)
-            setSeconds((totalSeconds + 1)%60);
-            setMinutes(Math.floor(totalSeconds/60)%60);
-            setHours(Math.floor(totalSeconds/3600));
+            setTimeout(function() {context.setTotalSeconds((context.totalSeconds + 1));}, 1000)
+            setSeconds((context.totalSeconds + 1)%60);
+            setMinutes(Math.floor(context.totalSeconds/60)%60);
+            setHours(Math.floor(context.totalSeconds/3600));
 
             setDisplayTime (timeFormat)
         } else {
             setDisplayTime('0:00:00');
-            setTotalSeconds(0);
+            context.setTotalSeconds(0);
             setSeconds(0);
             setMinutes(0);
             setHours(0);
         }
-    }, [totalSeconds, timerOn]) 
+    }, [context.totalSeconds, timerOn]) 
 
     return (
         <div className='time-container'>

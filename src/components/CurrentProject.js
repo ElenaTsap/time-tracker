@@ -1,8 +1,10 @@
 import Clock from '../components/Clock'
 import './CurrentProject.css'
+import { StateHolder } from '../MyContext'
 
 
 const CurrentProject = ({ currentProject, timerOn, timerHandler, totalSeconds, setTotalSeconds }) => {
+        
     return (
         <section className='current-project-container'>
             {
@@ -13,12 +15,12 @@ const CurrentProject = ({ currentProject, timerOn, timerHandler, totalSeconds, s
 
                 :   <div className='current-project-card'>
                         <h3>{currentProject}</h3>
-                        <Clock 
-                            timerOn = {timerOn}
-                            timerHandler ={timerHandler}
-                            totalSeconds = {totalSeconds}
-                            setTotalSeconds = {setTotalSeconds}
-                        />
+                        <StateHolder>
+                            <Clock 
+                                timerOn = {timerOn}
+                                timerHandler ={timerHandler}
+                            />
+                        </StateHolder>
                     </div>
             }
         </section>

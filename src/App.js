@@ -4,6 +4,7 @@ import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
 import { useState, useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom'
+import { StateHolder } from './MyContext';
 
 function App() {
 const [currentUser, setCurrentUser] = useState(localStorage.getItem('current-user'));
@@ -26,10 +27,13 @@ useEffect(() => {
         <Route path='/'>
           {
             loggedIn ?
-            <Dashboard 
-              currentUser = {currentUser} 
-              setLoggedIn = {setLoggedIn}
-            />
+            <StateHolder>
+              <Dashboard 
+                currentUser = {currentUser} 
+                setLoggedIn = {setLoggedIn}
+              />
+            </StateHolder>
+
             :<Login 
               setCurrentUser = {setCurrentUser} 
               setLoggedIn = {setLoggedIn}
