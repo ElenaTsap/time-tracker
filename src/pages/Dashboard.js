@@ -10,57 +10,14 @@ import { Route, Switch } from 'react-router-dom'
 import ApiToGo from "api-to-go"
 import {ContextCreator} from '../MyContext'
 import {useContext} from 'react'
+/* import { StateHolder } from '../MyContext'; */
+import { getTimeStamp, dateFormatter, getTime } from '../components/Tools'
 
 const Dashboard = ({currentUser, setLoggedIn}) => {
     const context = useContext(ContextCreator);
     const [currentProject, setCurrentProject] = useState(null);
     const [logData, setLogData] = useState([]);
-    const [timerOn, setTimerOn] = useState(false);
     const [startTime, setStartTime] = useState(null)
-
-    
-    const getTimeStamp = () => {
-        let timeStamp = new Date().getTime();
-        return timeStamp
-    }
-
-    const dateFormatter = () => {
-        const timeElapsed = Date.now();
-        const today = new Date(timeElapsed);
-        let displayDate = today.toDateString();
-        return displayDate;
-    }
-
-    const getTime = () => {
-        
-        let date = new Date(getTimeStamp());
-        let hours = date.getHours();
-        let minutes = "0" + date.getMinutes();
-        let seconds = "0" + date.getSeconds();
-        let formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-
-        return formattedTime
-    }
-
-    const timeFormatter = (totalSeconds) => {
-        let seconds = ((totalSeconds)%60);
-        let minutes =  (Math.floor(totalSeconds/60)%60);
-        let hours = (Math.floor(totalSeconds/3600));
-
-        if (minutes <= 9) {
-            if (seconds <= 9) {
-                return (`${hours}:0${minutes}:0${seconds}`)
-            } else {
-                return (`${hours}:0${minutes}:${seconds}`)
-            }
-        } else {
-            if (seconds <= 9) {
-                return (`${hours}:${minutes}:0${seconds}`)
-            } else {
-                return (`${hours}:${minutes}:${seconds}`)
-            }
-        }
-    }
 
     useEffect(() => {
         ApiToGo.get().then(res =>
@@ -75,11 +32,11 @@ const Dashboard = ({currentUser, setLoggedIn}) => {
 
     const timerHandler = () => {
         /*  setTimerOn(prevTimerOn => !prevTimerOn) */
-            if (timerOn === false) {
-                setTimerOn(true)
+            if (context.timerOn === false) {
+                context.setTimerOn(true)
                 setStartTime(getTime());
             } else {
-                setTimerOn(false);
+                context.setTimerOn(false);
                 setLogData([...logData, {
                     id: getTimeStamp(),
                     projectName: currentProject,
@@ -93,27 +50,13 @@ const Dashboard = ({currentUser, setLoggedIn}) => {
             }
         }
 
-/*     useEffect(() => {
-        const getLogData = async () => {
-            const res = await ApiToGo
-            .get()
-            .then(res => {
-                console.log('res from get',res[0]);
-                setLogData(res[0]);                 
-            })
-            .catch(error => {console.log(error)});
-        }
-        getLogData()
-    }, [])  */
-
     useEffect(() => {
         ApiToGo.post([...logData])
                 .then(res => {console.log(res);})
                 .catch(error => {console.log(error)});
         }, [logData]);
 
-
-        
+// used both in Projects and Charts so leave it here
 const totalProjectTimes = [];
     
     logData.forEach(project => {
@@ -135,13 +78,12 @@ const totalProjectTimes = [];
                     setLoggedIn={setLoggedIn}
                 />
                 
-
-                <CurrentProject 
-                    currentProject = {currentProject} 
-                    timerOn = {timerOn}
-                    timerHandler = {timerHandler}
-                />
-
+{/*                 <StateHolder> */}
+                    <CurrentProject 
+                        currentProject = {currentProject} 
+                        timerHandler = {timerHandler}
+                    />
+{/*                 </StateHolder> */}
 
                 <Navbar/>
 
@@ -151,7 +93,6 @@ const totalProjectTimes = [];
                         <Logs
                             logData = {logData}
                             setLogData = {setLogData}
-                            timeFormatter = {timeFormatter}
                         />
                     </Route>
 
@@ -165,14 +106,11 @@ const totalProjectTimes = [];
                         <Projects
                             logData = {logData}
                             setLogData = {setLogData}
-                            dateFormatter = {dateFormatter}
                             totalProjectTimes = {totalProjectTimes}
                             currentUser={currentUser} 
                             currentProject = {currentProject}
                             setCurrentProject = {setCurrentProject} 
-                            timerOn = {timerOn}
                             timerHandler = {timerHandler}
-                            timeFormatter = {timeFormatter}
                         />
                     </Route>
                 </Switch>
@@ -182,3 +120,16 @@ const totalProjectTimes = [];
 
 export default Dashboard
 
+
+/*     useEffect(() => {
+        const getLogData = async () => {
+            const res = await ApiToGo
+            .get()
+            .then(res => {
+                console.log('res from get',res[0]);
+                setLogData(res[0]);                 
+            })
+            .catch(error => {console.log(error)});
+        }
+        getLogData()
+    }, [])  */

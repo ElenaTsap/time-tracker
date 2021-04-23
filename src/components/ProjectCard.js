@@ -1,17 +1,13 @@
 import './ProjectCard.css'
+import { timeFormatter } from '../components/Tools'
+import {ContextCreator} from '../MyContext'
+import {useContext} from 'react'
 
-const ProjectCard = ({ item, currentProject, setCurrentProject, timeFormatter, timerOn, timerHandler }) => {
-/*     const getRandomColor = () => {
-        var letters = '0123456789ABCDEF';
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    } */
+const ProjectCard = ({ item, currentProject, setCurrentProject, timerHandler }) => {
+    const context = useContext(ContextCreator);
 
     const activeProjectChecker = (project) => {
-        if (timerOn === true) {
+        if (context.timerOn === true) {
             if (window.confirm(`Stop tracking ${currentProject}?`)) {
                 timerHandler();
                 setCurrentProject(project)
@@ -32,3 +28,12 @@ const ProjectCard = ({ item, currentProject, setCurrentProject, timeFormatter, t
 }
 
 export default ProjectCard
+
+/*     const getRandomColor = () => {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    } */

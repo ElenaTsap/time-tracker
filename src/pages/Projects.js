@@ -1,8 +1,10 @@
 import ProjectCard from '../components/ProjectCard'
 import './Projects.css'
 import { useState } from 'react';
+import { dateFormatter } from '../components/Tools'
+/* import { StateHolder } from '../MyContext'; */
 
-const Projects = ({ logData, setLogData, dateFormatter, currentUser, currentProject, setCurrentProject, totalProjectTimes, timerOn, timeFormatter }) => {
+const Projects = ({ logData, setLogData, currentUser, currentProject, setCurrentProject, totalProjectTimes }) => {
     const [newProject, setNewProject] = useState('')
 
     const addProject = (e) => {
@@ -25,16 +27,16 @@ const Projects = ({ logData, setLogData, dateFormatter, currentUser, currentProj
     }
     
 
-    
     const currentUserProjects = totalProjectTimes.map((item,index) =>
+/*     <StateHolder> */
         <ProjectCard 
             key = {index}
             item = {item} 
             currentProject = {currentProject}
             setCurrentProject = {setCurrentProject} 
-            timeFormatter = {timeFormatter}
-            timerOn = {timerOn}
         />
+/*     </StateHolder> */
+
     );
 
 
