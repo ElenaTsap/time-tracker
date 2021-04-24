@@ -1,17 +1,21 @@
 import './Logs.css'
 import { FaTrash } from 'react-icons/fa';
 import { timeFormatter } from '../components/Tools'
+import {ContextCreator} from '../MyContext'
+import {useContext} from 'react'
 
-const Logs = ({ logData, setLogData }) => {
+const Logs = () => {
+    const context = useContext(ContextCreator);
+
     const deleteLog = ((item, index) => {
         if (window.confirm(`Are you sure you want to delete this log? This action cannot be reversed`)) {
-            let oldLogData = [...logData]
+            let oldLogData = [...context.logData]
             oldLogData.splice(index, 1);
-            setLogData(oldLogData);
+            context.setLogData(oldLogData);
         }
     })
 
-    const allLogs = logData.map((item,index) => {
+    const allLogs = context.logData.map((item,index) => {
         if (item.logDurationSec > 0) { 
             return (<tr key = {item.id}>
                 <td>{item.projectName}</td>

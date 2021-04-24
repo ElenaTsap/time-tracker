@@ -4,9 +4,9 @@ import VerticalBar from '../components/VerticalBar'
 const Charts = ({ totalProjectTimes }) => {
     return (
         <div>
-            <VerticalBar
- /*                totalProjectTimes = {totalProjectTimes} */
-            />
+                <VerticalBar
+                    totalProjectTimes = {totalProjectTimes}
+                />
         </div>
     )
 }

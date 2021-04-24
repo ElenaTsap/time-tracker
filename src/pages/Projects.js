@@ -2,9 +2,11 @@ import ProjectCard from '../components/ProjectCard'
 import './Projects.css'
 import { useState } from 'react';
 import { dateFormatter } from '../components/Tools'
-/* import { StateHolder } from '../MyContext'; */
+import {ContextCreator} from '../MyContext'
+import {useContext} from 'react'
 
-const Projects = ({ logData, setLogData, currentUser, currentProject, setCurrentProject, totalProjectTimes }) => {
+const Projects = ({ currentUser, currentProject, setCurrentProject, totalProjectTimes }) => {
+    const context = useContext(ContextCreator);
     const [newProject, setNewProject] = useState('')
 
     const addProject = (e) => {
@@ -15,7 +17,7 @@ const Projects = ({ logData, setLogData, currentUser, currentProject, setCurrent
             return
         }
     
-        setLogData([...logData, {
+        context.setLogData([...context.logData, {
             projectName: newProject,
             userName: currentUser,
             startDate: dateFormatter(),
@@ -28,15 +30,12 @@ const Projects = ({ logData, setLogData, currentUser, currentProject, setCurrent
     
 
     const currentUserProjects = totalProjectTimes.map((item,index) =>
-/*     <StateHolder> */
         <ProjectCard 
             key = {index}
             item = {item} 
             currentProject = {currentProject}
             setCurrentProject = {setCurrentProject} 
         />
-/*     </StateHolder> */
-
     );
 
 

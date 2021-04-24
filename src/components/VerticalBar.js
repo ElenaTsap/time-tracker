@@ -14,9 +14,9 @@ import { Bar } from 'react-chartjs-2'
         },
     }
     
-    const VerticalBar = ({}) => {
+    const VerticalBar = React.memo(({totalProjectTimes}) => {
         const data = {
-            labels: [10, 10]/* totalProjectTimes.map((item) => item.projectName) */,
+            labels: totalProjectTimes.map((item) => item.projectName),
             datasets: [
                 {
                     label: '# of hours',
@@ -50,6 +50,6 @@ import { Bar } from 'react-chartjs-2'
         </div>
         <Bar data={data} options={options} />
         </>
-    )}
+    )})
     
     export default VerticalBar

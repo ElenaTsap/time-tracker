@@ -13,7 +13,7 @@ const Clock = ({ timerHandler }) => {
         if (context.timerOn === true) {
             setTimeout(function() {context.setTotalSeconds((context.totalSeconds + 1));}, 1000)
             setSeconds((context.totalSeconds + 1)%60);
-            setDisplayTime (timeFormatter(seconds))
+            setDisplayTime(timeFormatter(seconds))
         } else {
             setDisplayTime('0:00:00');
             context.setTotalSeconds(0);

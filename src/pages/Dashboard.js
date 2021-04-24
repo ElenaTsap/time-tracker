@@ -10,19 +10,16 @@ import { Route, Switch } from 'react-router-dom'
 import ApiToGo from "api-to-go"
 import {ContextCreator} from '../MyContext'
 import {useContext} from 'react'
-/* import { StateHolder } from '../MyContext'; */
+import { StateHolder } from '../MyContext';
 import { getTimeStamp, dateFormatter, getTime } from '../components/Tools'
 
 const Dashboard = ({currentUser, setLoggedIn}) => {
     const context = useContext(ContextCreator);
-    const [currentProject, setCurrentProject] = useState(null);
-    const [logData, setLogData] = useState([]);
-    const [startTime, setStartTime] = useState(null)
 
     useEffect(() => {
         ApiToGo.get().then(res =>
             {
-                setLogData(res[0]);
+                context.setLogData(res[0]);
                 console.log('from else',res[0])
 
             }).catch(error => {
@@ -34,32 +31,32 @@ const Dashboard = ({currentUser, setLoggedIn}) => {
         /*  setTimerOn(prevTimerOn => !prevTimerOn) */
             if (context.timerOn === false) {
                 context.setTimerOn(true)
-                setStartTime(getTime());
+                context.setStartTime(getTime());
             } else {
                 context.setTimerOn(false);
-                setLogData([...logData, {
+                context.setLogData([...context.logData, {
                     id: getTimeStamp(),
-                    projectName: currentProject,
+                    projectName: context.currentProject,
                     userName: currentUser,
                     startDate: dateFormatter(),
-                    startTime: startTime,
+                    startTime: context.startTime,
                     endTime: getTime(),
                     logDurationSec:context.totalSeconds
                 }]);
-                setStartTime(null)
+                context.setStartTime(null)
             }
         }
 
     useEffect(() => {
-        ApiToGo.post([...logData])
+        ApiToGo.post([...context.logData])
                 .then(res => {console.log(res);})
                 .catch(error => {console.log(error)});
-        }, [logData]);
+        }, [context.logData]);
 
 // used both in Projects and Charts so leave it here
 const totalProjectTimes = [];
     
-    logData.forEach(project => {
+    context.logData.forEach(project => {
         let foundProject = totalProjectTimes.find(totalProject => {
             return totalProject.projectName === project.projectName
         })
@@ -78,38 +75,31 @@ const totalProjectTimes = [];
                     setLoggedIn={setLoggedIn}
                 />
                 
-{/*                 <StateHolder> */}
                     <CurrentProject 
-                        currentProject = {currentProject} 
+                        /* currentProject = {currentProject}  */
                         timerHandler = {timerHandler}
                     />
-{/*                 </StateHolder> */}
 
                 <Navbar/>
 
                 <Switch>
 
                     <Route exact path='/logs'>
-                        <Logs
-                            logData = {logData}
-                            setLogData = {setLogData}
-                        />
+                        <Logs/>
                     </Route>
 
                     <Route exact path='/charts'>
                         <Charts 
-                        /*     totalProjectTimes = {totalProjectTimes} */
+                            totalProjectTimes = {totalProjectTimes}
                         />
                     </Route>
 
                     <Route path='/'>
                         <Projects
-                            logData = {logData}
-                            setLogData = {setLogData}
                             totalProjectTimes = {totalProjectTimes}
                             currentUser={currentUser} 
-                            currentProject = {currentProject}
-                            setCurrentProject = {setCurrentProject} 
+/*                             currentProject = {currentProject}
+                            setCurrentProject = {setCurrentProject}  */
                             timerHandler = {timerHandler}
                         />
                     </Route>

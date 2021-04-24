@@ -8,17 +8,17 @@ const ProjectCard = ({ item, currentProject, setCurrentProject, timerHandler }) 
 
     const activeProjectChecker = (project) => {
         if (context.timerOn === true) {
-            if (window.confirm(`Stop tracking ${currentProject}?`)) {
+            if (window.confirm(`Stop tracking ${context.currentProject}?`)) {
                 timerHandler();
-                setCurrentProject(project)
+                context.setCurrentProject(project)
             }
         } else {
-            setCurrentProject(project)
+            context.setCurrentProject(project)
         }
     }
 
     return (
-        <div onClick={(e)=> activeProjectChecker(item.projectName)} className= {`project-card ${(item.projectName === currentProject) && 'selected'}`}>
+        <div onClick={(e)=> activeProjectChecker(item.projectName)} className= {`project-card ${(item.projectName === context.currentProject) && 'selected'}`}>
             <div className='project-name'>{item.projectName}</div>
             <div className='project-date'>started: {item.startDate}</div>
             <div className='project-date'>last tracked: {item.lastTrackedDate}</div>
