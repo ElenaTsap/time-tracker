@@ -90,7 +90,7 @@ const totalProjectTimes = [];
 
                     <Route exact path='/charts'>
                         <Charts 
-                            totalProjectTimes = {totalProjectTimes}
+                            /* totalProjectTimes = {totalProjectTimes} */
                         />
                     </Route>
 

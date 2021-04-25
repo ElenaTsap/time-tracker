@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard'
 import { useState, useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { StateHolder } from './MyContext';
+import Charts from '../src/pages/Charts';
 
 function App() {
 const [currentUser, setCurrentUser] = useState(localStorage.getItem('current-user'));
@@ -32,6 +33,7 @@ useEffect(() => {
                 currentUser = {currentUser} 
                 setLoggedIn = {setLoggedIn}
               />
+              <Charts/>
             </StateHolder>
 
             :<Login 

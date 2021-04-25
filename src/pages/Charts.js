@@ -1,14 +1,14 @@
 import React from 'react'
 import VerticalBar from '../components/VerticalBar'
 
-const Charts = ({ totalProjectTimes }) => {
+const Charts = React.memo(({ /* totalProjectTimes */ }) => {
     return (
         <div>
                 <VerticalBar
-                    totalProjectTimes = {totalProjectTimes}
+                    /* totalProjectTimes = {totalProjectTimes} */
                 />
         </div>
     )
-}
+})
 
 export default Charts

@@ -2,21 +2,20 @@ import React from 'react'
 import { Bar } from 'react-chartjs-2'
 
     
-    const options = {
+    const VerticalBar = ({/* totalProjectTimes */}) => {
+            const options = {
         scales: {
         yAxes: [
             {
             ticks: {
-                beginAtZero: true,
+                beginAtZero: false,
             },
             },
         ],
         },
     }
-    
-    const VerticalBar = React.memo(({totalProjectTimes}) => {
         const data = {
-            labels: totalProjectTimes.map((item) => item.projectName),
+            labels: [10,10],
             datasets: [
                 {
                     label: '# of hours',
@@ -50,6 +49,6 @@ import { Bar } from 'react-chartjs-2'
         </div>
         <Bar data={data} options={options} />
         </>
-    )})
+    )}
     
     export default VerticalBar

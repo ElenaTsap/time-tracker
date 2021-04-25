@@ -19,6 +19,7 @@ const ProjectCard = ({ item, currentProject, setCurrentProject, timerHandler }) 
 
     return (
         <div onClick={(e)=> activeProjectChecker(item.projectName)} className= {`project-card ${(item.projectName === context.currentProject) && 'selected'}`}>
+             {console.log('ProjectCard re-renders')}
             <div className='project-name'>{item.projectName}</div>
             <div className='project-date'>started: {item.startDate}</div>
             <div className='project-date'>last tracked: {item.lastTrackedDate}</div>

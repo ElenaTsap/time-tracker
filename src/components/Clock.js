@@ -9,17 +9,31 @@ const Clock = ({ timerHandler }) => {
     const [seconds, setSeconds] = useState(0);
     const [displayTime, setDisplayTime] = useState('0:00:00');
 
+/*     useEffect(() => {
+        if (context.timerOn === false) {
+            context.setTotalSeconds((seconds))
+            setSeconds(0);
+        }
+    }, [context.timerOn])  */
+
     useEffect(() => {
         if (context.timerOn === true) {
+/*         setTimeout(function() {
+                setSeconds((seconds + 1)%60);
+                context.setTotalSeconds((context.totalSeconds + 1)%60);
+            }, 1000)
+            setDisplayTime (timeFormatter(seconds)) */
             setTimeout(function() {context.setTotalSeconds((context.totalSeconds + 1));}, 1000)
             setSeconds((context.totalSeconds + 1)%60);
-            setDisplayTime(timeFormatter(seconds))
+            setDisplayTime (timeFormatter(seconds)) 
         } else {
             setDisplayTime('0:00:00');
             context.setTotalSeconds(0);
             setSeconds(0);
         }
     }, [context.totalSeconds, context.timerOn]) 
+
+
 
     return (
         <div className='time-container'>
