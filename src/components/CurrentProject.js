@@ -3,7 +3,7 @@ import './CurrentProject.css'
 import {ContextCreator} from '../MyContext'
 import {useContext} from 'react'
 
-const CurrentProject = ({ currentProject, timerHandler }) => {
+const CurrentProject = ({ currentProject, timerHandler, currentUser }) => {
     const context = useContext(ContextCreator);
     return (
         <section className='current-project-container'>
@@ -16,7 +16,8 @@ const CurrentProject = ({ currentProject, timerHandler }) => {
                 :   <div className='current-project-card'>
                         <h3>{context.currentProject}</h3>
                         <Clock 
-                                timerHandler ={timerHandler}
+                            currentUser={currentUser} 
+                                /* timerHandler ={timerHandler} */
                             />
                     </div>
             }

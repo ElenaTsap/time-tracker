@@ -3,37 +3,45 @@ import { FaPlay, FaPause } from 'react-icons/fa';
 import {ContextCreator} from '../MyContext'
 import {useContext} from 'react'
 import { timeFormatter } from '../components/Tools'
+import { getTimeStamp, dateFormatter, getTime } from '../components/Tools'
 
-const Clock = ({ timerHandler }) => {
+const Clock = ({ currentUser }) => {
     const context = useContext(ContextCreator);
     const [seconds, setSeconds] = useState(0);
     const [displayTime, setDisplayTime] = useState('0:00:00');
 
-/*     useEffect(() => {
+    const timerHandler = () => {
+    /*  setTimerOn(prevTimerOn => !prevTimerOn) */
         if (context.timerOn === false) {
-            context.setTotalSeconds((seconds))
-            setSeconds(0);
+            context.setTimerOn(true)
+            context.setStartTime(getTime());
+        } else {
+            context.setStartTime(getTime());
+            context.setTimerOn(false);
+            context.setLogData([...context.logData, {
+                id: getTimeStamp(),
+                projectName: context.currentProject,
+                userName: currentUser,
+                startDate: dateFormatter(),
+                startTime: context.startTime,
+                endTime: getTime(),
+                logDurationSec:seconds
+            }]);
+            context.setTotalSeconds(seconds);
+            context.setStartTime(null)
         }
-    }, [context.timerOn])  */
-
+    }
+    
     useEffect(() => {
         if (context.timerOn === true) {
-/*         setTimeout(function() {
-                setSeconds((seconds + 1)%60);
-                context.setTotalSeconds((context.totalSeconds + 1)%60);
-            }, 1000)
-            setDisplayTime (timeFormatter(seconds)) */
-            setTimeout(function() {context.setTotalSeconds((context.totalSeconds + 1));}, 1000)
-            setSeconds((context.totalSeconds + 1)%60);
-            setDisplayTime (timeFormatter(seconds)) 
+        setTimeout(function() { setSeconds((seconds + 1)%60); }, 1000)
+            setDisplayTime (timeFormatter(seconds));
         } else {
             setDisplayTime('0:00:00');
-            context.setTotalSeconds(0);
+/*             context.setTotalSeconds(seconds); */
             setSeconds(0);
         }
-    }, [context.totalSeconds, context.timerOn]) 
-
-
+    }, [seconds, context.timerOn]) 
 
     return (
         <div className='time-container'>

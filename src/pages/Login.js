@@ -12,12 +12,14 @@ const Auth = ({ setLoggedIn, setCurrentUser }) => {
 
         ApiToGo.login(email, pass).then(res =>
             {
-                console.log('res', res);
-                if (res !== null) {
+                console.log('res.status', res.status);
+                if (res.status !== 'failed') {
                     console.log('loggedIN!');
                     setLoggedIn(true);
                     setCurrentUser(email);
                     localStorage.setItem('current-user', email);
+                } else {
+                    alert(res.message)
                 }
             }).catch(error => {alert(error)});
     }

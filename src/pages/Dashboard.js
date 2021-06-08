@@ -27,26 +27,6 @@ const Dashboard = ({currentUser, setLoggedIn}) => {
             });
         }, []);
 
-    const timerHandler = () => {
-        /*  setTimerOn(prevTimerOn => !prevTimerOn) */
-            if (context.timerOn === false) {
-                context.setTimerOn(true)
-                context.setStartTime(getTime());
-            } else {
-                context.setTimerOn(false);
-                context.setLogData([...context.logData, {
-                    id: getTimeStamp(),
-                    projectName: context.currentProject,
-                    userName: currentUser,
-                    startDate: dateFormatter(),
-                    startTime: context.startTime,
-                    endTime: getTime(),
-                    logDurationSec:context.totalSeconds
-                }]);
-                context.setStartTime(null)
-            }
-        }
-
     useEffect(() => {
         ApiToGo.post([...context.logData])
                 .then(res => {console.log(res);})
@@ -75,10 +55,11 @@ const totalProjectTimes = [];
                     setLoggedIn={setLoggedIn}
                 />
                 
-                    <CurrentProject 
-                        /* currentProject = {currentProject}  */
-                        timerHandler = {timerHandler}
-                    />
+                <CurrentProject 
+                    currentUser={currentUser} 
+                    /* currentProject = {currentProject}  */
+                    /* timerHandler = {timerHandler} */
+                />
 
                 <Navbar/>
 
@@ -90,7 +71,7 @@ const totalProjectTimes = [];
 
                     <Route exact path='/charts'>
                         <Charts 
-                            /* totalProjectTimes = {totalProjectTimes} */
+                            totalProjectTimes = {totalProjectTimes}
                         />
                     </Route>
 
@@ -98,9 +79,7 @@ const totalProjectTimes = [];
                         <Projects
                             totalProjectTimes = {totalProjectTimes}
                             currentUser={currentUser} 
-/*                             currentProject = {currentProject}
-                            setCurrentProject = {setCurrentProject}  */
-                            timerHandler = {timerHandler}
+                            /* timerHandler = {timerHandler} */
                         />
                     </Route>
                 </Switch>

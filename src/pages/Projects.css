@@ -2,7 +2,7 @@
     width: 900px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    border: 4px solid black;
+    /* border: 4px solid black; */
 }
 
 .projects-container > form > input {
@@ -13,7 +13,7 @@
 }
 
 .projects-container > form > input:focus {
-    border: 4px solid black;
+    /* border: 4px solid black; */
     height: 130px;
     width: 93%;
 }
@@ -42,10 +42,10 @@ input[type="text"]
 
 @media only screen and (max-width: 960px) {
     .projects-container {
-        width: 440px;
+        width: 460px;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        border: 4px solid black;
+        /* border: 4px solid black; */
     }
 
     .projects-container > form > input  {

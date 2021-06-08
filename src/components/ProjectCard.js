@@ -9,7 +9,7 @@ const ProjectCard = ({ item, currentProject, setCurrentProject, timerHandler }) 
     const activeProjectChecker = (project) => {
         if (context.timerOn === true) {
             if (window.confirm(`Stop tracking ${context.currentProject}?`)) {
-                timerHandler();
+                context.setTimerOn(false);
                 context.setCurrentProject(project)
             }
         } else {
@@ -19,11 +19,11 @@ const ProjectCard = ({ item, currentProject, setCurrentProject, timerHandler }) 
 
     return (
         <div onClick={(e)=> activeProjectChecker(item.projectName)} className= {`project-card ${(item.projectName === context.currentProject) && 'selected'}`}>
-             {console.log('ProjectCard re-renders')}
             <div className='project-name'>{item.projectName}</div>
             <div className='project-date'>started: {item.startDate}</div>
             <div className='project-date'>last tracked: {item.lastTrackedDate}</div>
             <div className='project-time'>{timeFormatter(item.totalDurationSec)}</div>
+
         </div>
     )
 }

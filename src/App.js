@@ -14,7 +14,7 @@ const [registered, setRegistered] = useState(false);
 
 useEffect(() => {
   const token = localStorage.getItem('api-to-go');
-  if (token !== null) {
+  if (token !== null && currentUser!==null) {
     setLoggedIn(true);
   }
 }, [])
@@ -31,9 +31,9 @@ useEffect(() => {
             <StateHolder>
               <Dashboard 
                 currentUser = {currentUser} 
+                loggedIn = {loggedIn}
                 setLoggedIn = {setLoggedIn}
               />
-              <Charts/>
             </StateHolder>
 
             :<Login 
