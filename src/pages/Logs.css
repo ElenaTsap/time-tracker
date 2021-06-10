@@ -9,39 +9,41 @@
 
 .logs-container > table {
     width: 100%;
+    position: relative;
     border-collapse: collapse;
 }
 
 .logs-container > table > tr {
-    border-bottom: 4px solid black;
+    border-bottom: 2px solid black;
 }
 
 .logs-container > table > tr:nth-of-type(1){
     background-color: #FFBF38;
-    /* position: sticky; */
+    position: sticky;
 }
 
 .logs-container > table > tr:nth-child(even) {
-    background-color: #dddddd;
+    background-color: #f1f1f1;
 }
 
 .logs-container > table > tr:nth-child(odd) {
-    background-color: #a7a7a7;
+    background-color: #c7c6c6;
 }
 
 .logs-container > table > tr > th {
+    position: sticky;
+    top: 0;
+    height: 60px;
+    z-index: 100;
     background-color: #000000;
     color: white;
-}
-
-.logs-container > table > tr > th {
     text-align: left;
-    padding: 20px;
 }
 
 .logs-container > table > tr > td {
     text-align: left;
     padding: 14px;
+    z-index: -5;
 }
 
 @media only screen and (max-width: 960px) {

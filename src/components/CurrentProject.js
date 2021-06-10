@@ -7,6 +7,7 @@ const CurrentProject = ({ currentUser }) => {
     const context = useContext(ContextCreator);
 
     console.log('current project re-renders');
+    console.log('from current project components', context.currentProject);
     return (
         <section className='current-project-container'>
             {
