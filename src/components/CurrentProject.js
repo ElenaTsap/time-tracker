@@ -3,8 +3,10 @@ import './CurrentProject.css'
 import {ContextCreator} from '../MyContext'
 import {useContext} from 'react'
 
-const CurrentProject = ({ currentProject, timerHandler, currentUser }) => {
+const CurrentProject = ({ currentUser }) => {
     const context = useContext(ContextCreator);
+
+    console.log('current project re-renders');
     return (
         <section className='current-project-container'>
             {

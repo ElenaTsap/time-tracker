@@ -10,6 +10,23 @@
     padding: 12px 8px 8px 12px;
 }
 
+.card-header-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-header-container > div:nth-child(2) {
+    width:16px;
+    height: 16px;
+    border: 1px solid black;
+    background-color: white;
+    padding: 1px 0 1px 2px;
+}
+
+.card-header-container > div:nth-child(2):hover {
+    background-color: rgb(255, 0, 0);
+}
+
 .project-name {
     font-weight: 800;
     line-height: 24px;

@@ -5,13 +5,11 @@ import Projects from './Projects';
 import Logs from './Logs';
 import Charts from './Charts';
 import Navbar from '../components/Navbar'
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom'
 import ApiToGo from "api-to-go"
 import {ContextCreator} from '../MyContext'
 import {useContext} from 'react'
-import { StateHolder } from '../MyContext';
-import { getTimeStamp, dateFormatter, getTime } from '../components/Tools'
 
 const Dashboard = ({currentUser, setLoggedIn}) => {
     const context = useContext(ContextCreator);
@@ -25,7 +23,7 @@ const Dashboard = ({currentUser, setLoggedIn}) => {
             }).catch(error => {
             console.log(error)
             });
-        }, []);
+    }, []);
 
     useEffect(() => {
         ApiToGo.post([...context.logData])

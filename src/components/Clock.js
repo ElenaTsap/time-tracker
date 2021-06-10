@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { FaPlay, FaPause } from 'react-icons/fa';
-import {ContextCreator} from '../MyContext'
-import {useContext} from 'react'
+import { ContextCreator } from '../MyContext'
+import { useContext } from 'react'
 import { timeFormatter } from '../components/Tools'
 import { getTimeStamp, dateFormatter, getTime } from '../components/Tools'
 
 const Clock = ({ currentUser }) => {
     const context = useContext(ContextCreator);
-    const [seconds, setSeconds] = useState(0);
     const [displayTime, setDisplayTime] = useState('0:00:00');
+    const [seconds, setSeconds] = useState(0);
 
     const timerHandler = () => {
     /*  setTimerOn(prevTimerOn => !prevTimerOn) */
@@ -16,7 +16,7 @@ const Clock = ({ currentUser }) => {
             context.setTimerOn(true)
             context.setStartTime(getTime());
         } else {
-            context.setStartTime(getTime());
+            //context.setStartTime(getTime());
             context.setTimerOn(false);
             context.setLogData([...context.logData, {
                 id: getTimeStamp(),
@@ -27,18 +27,18 @@ const Clock = ({ currentUser }) => {
                 endTime: getTime(),
                 logDurationSec:seconds
             }]);
-            context.setTotalSeconds(seconds);
+            context.setTotalSeconds(seconds); 
             context.setStartTime(null)
         }
     }
     
     useEffect(() => {
         if (context.timerOn === true) {
-        setTimeout(function() { setSeconds((seconds + 1)%60); }, 1000)
+            let allSeconds = seconds;
+            setTimeout(() => { setSeconds((allSeconds + 1)); }, 1000)
             setDisplayTime (timeFormatter(seconds));
         } else {
             setDisplayTime('0:00:00');
-/*             context.setTotalSeconds(seconds); */
             setSeconds(0);
         }
     }, [seconds, context.timerOn]) 

@@ -1,5 +1,5 @@
 import React from 'react'
-import {useState, createContext} from 'react'
+import {useState} from 'react'
 
 export const ContextCreator = React.createContext();
 
@@ -9,6 +9,7 @@ export const StateHolder = function (props) {
     const [startTime, setStartTime] = useState(null)
     const [totalSeconds, setTotalSeconds] = useState(0);
     const [timerOn, setTimerOn] = useState(false);
+
 
     return (
         <ContextCreator.Provider value = {{logData, setLogData, totalSeconds, setTotalSeconds, timerOn, setTimerOn, currentProject, setCurrentProject, startTime, setStartTime}}>

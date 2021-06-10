@@ -5,7 +5,7 @@ import { dateFormatter } from '../components/Tools'
 import {ContextCreator} from '../MyContext'
 import {useContext} from 'react'
 
-const Projects = ({ currentUser, currentProject, setCurrentProject, totalProjectTimes, timerHandler }) => {
+const Projects = ({ currentUser, totalProjectTimes }) => {
     const context = useContext(ContextCreator);
     const [newProject, setNewProject] = useState('')
 
@@ -27,7 +27,6 @@ const Projects = ({ currentUser, currentProject, setCurrentProject, totalProject
         }])
         setNewProject('');
     }
-    
 
     const currentUserProjects = totalProjectTimes.map((item,index) =>
         <ProjectCard 

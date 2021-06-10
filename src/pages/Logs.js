@@ -15,7 +15,7 @@ const Logs = () => {
         }
     })
 
-    const allLogs = context.logData.map((item,index) => {
+    const allLogs = context.logData.map((item, index) => {
         if (item.logDurationSec > 0) { 
             return (<tr key = {item.id}>
                 <td>{item.projectName}</td>
