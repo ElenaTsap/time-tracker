@@ -49,7 +49,7 @@ const ProjectCard = ({ item }) => {
         <div onClick={(e)=> activeProjectChecker(item.projectName)} className= {`project-card ${(item.projectName === context.currentProject) && 'selected'}`}>
             <div className='card-header-container'>
             <div className='project-name'>{item.projectName}</div>
-            <div onClick={(e)=>deleteProjectHandler(e, item.projectName)}><GrClose/></div>
+            <GrClose onClick={(e)=>deleteProjectHandler(e, item.projectName)}/>
             </div>
             <div className='project-date'>created: {item.startDate}</div>
             <div className='project-date'>latest: {item.totalDurationSec > 0 ? item.lastTrackedDate : '-'}</div>

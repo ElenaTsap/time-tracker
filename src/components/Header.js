@@ -1,4 +1,6 @@
 import './Header.css'
+import Switch from './Switch';
+
 const Header = ({ currentUser, setLoggedIn }) => {
 
     const logOut = () => {
@@ -12,7 +14,10 @@ const Header = ({ currentUser, setLoggedIn }) => {
     return (
         <section className='header-container'>
             <h3>Welcome <span>{currentUser}</span></h3>
+            <div>
             <button onClick = {logOut}>logout</button>
+            <div><Switch/></div>
+            </div>
         </section>
     )
 }

@@ -1,0 +1,21 @@
+.charts-container {
+    border: 4px solid black;
+    margin: 0px 6%;
+    height: 60%;
+    width: 900px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.polar-chart {
+
+}
+
+@media only screen and (max-width: 960px) {
+
+    .charts-container {
+        width: 450px;
+        font-size: 0.8rem;
+        font-weight: 400;
+    }
+}

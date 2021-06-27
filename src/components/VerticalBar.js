@@ -19,7 +19,7 @@ import { Bar } from 'react-chartjs-2'
             datasets: [
                 {
                     label: '# of hours',
-                    data: [10, 10],
+                    data: [10, 30],
                     backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',

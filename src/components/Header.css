@@ -7,8 +7,7 @@
     width: 100%;
 }
 
-.header-container > h3,
-.header-container > button {
+.header-container > * {
     font-weight: 600;
     padding: 18px 32px;
 }
@@ -17,11 +16,21 @@
     color: #AEE8F1;
 }
 
-.header-container > button {
+.header-container > div > button {
     background-color: #121317;
     border: none;
     color: white;
     font-size: 1rem;
     text-decoration: underline;
     cursor: pointer;
+}
+
+.header-container > div  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-container > div > div {
+    margin-left: 28px;
 }

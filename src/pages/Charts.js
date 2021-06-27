@@ -1,12 +1,17 @@
 import React from 'react'
+import './Charts.css'
 import VerticalBar from '../components/VerticalBar'
+import Polar from '../components/Polar'
 
-const Charts = React.memo(({ /* totalProjectTimes */ }) => {
+const Charts = React.memo(({ totalProjectTimes }) => {
     return (
-        <div>
-            charts are coming up 
-                <VerticalBar
-                    /* totalProjectTimes = {totalProjectTimes} */
+        <div className="charts-container">
+                {/* <VerticalBar
+                    totalProjectTimes = {totalProjectTimes}
+                /> */}
+                <Polar
+                    totalProjectTimes = {totalProjectTimes}
+                    className = "polar-chart"
                 />
         </div>
     )
