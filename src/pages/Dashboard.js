@@ -14,6 +14,8 @@ import {useContext} from 'react'
 const Dashboard = ({currentUser, setLoggedIn}) => {
     const context = useContext(ContextCreator);
 
+    const bgColor = context.checked ? {backgroundColor: `#121317`}: {backgroundColor: `#FEFEF3`} ;
+
     useEffect(() => {
         ApiToGo.get().then(res =>
             {
@@ -47,7 +49,7 @@ const totalProjectTimes = [];
     })
 
     return (
-            <div className = 'dashboard-container'>
+            <div className = 'dashboard-container' style={bgColor}>
                 <Header
                     currentUser={currentUser} 
                     setLoggedIn={setLoggedIn}

@@ -1,7 +1,9 @@
 import './Header.css'
-import Switch from './Switch';
+import MySwitch from './Switch';
+
 
 const Header = ({ currentUser, setLoggedIn }) => {
+
 
     const logOut = () => {
         if (window.confirm('Are you sure you want to logout?')) {
@@ -16,7 +18,7 @@ const Header = ({ currentUser, setLoggedIn }) => {
             <h3>Welcome <span>{currentUser}</span></h3>
             <div>
             <button onClick = {logOut}>logout</button>
-            <div><Switch/></div>
+            <div><MySwitch/></div>
             </div>
         </section>
     )

@@ -1,33 +1,32 @@
-import React, { Component } from "react";
 import Switch from "react-switch";
+import {useState} from 'react'
+import {ContextCreator} from '../MyContext'
+import {useContext} from 'react'
 
-export default class SwitchExample extends Component {
-    constructor() {
-        super();
-        this.state = { checked: false };
-        this.handleChange = this.handleChange.bind(this);
+const MySwitch = ({checked, setChecked}) => {
+    const context = useContext(ContextCreator);
+
+    const handleChange = () => {
+        let toggled = !context.checked;
+        context.setChecked(toggled);
+        console.log(context.checked);
     }
 
-    handleChange(checked) {
-        this.setState({ checked });
-    }
-
-    render() {
-        return (
-        <div>
-            <Switch 
-                onChange={this.handleChange} 
-                checked={this.state.checked} 
-                offColor="#fff"
-                onColor="#fff"
-                offHandleColor="#3c038c"
-                onHandleColor="#e1c13b"
-                uncheckedIcon="false"
-                checkedIcon="false"
-                height="24"
-                width="40"
-            />
-        </div>
-        );
-    }
+    return (
+        <Switch 
+            onChange={handleChange} 
+            checked={context.checked} 
+            offColor="#fff"
+            onColor="#fff"
+            offHandleColor="#3c038c"
+            onHandleColor="#e1c13b"
+            uncheckedIcon="false"
+            checkedIcon="false"
+            height="24"
+            width="40"
+        />
+    )
 }
+
+export default MySwitch
+

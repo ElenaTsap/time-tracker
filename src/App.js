@@ -7,16 +7,19 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import { StateHolder } from './MyContext';
 
 function App() {
-const [currentUser, setCurrentUser] = useState(localStorage.getItem('current-user'));
-const [loggedIn, setLoggedIn] = useState(false);
-const [registered, setRegistered] = useState(false);
+  
+  const [currentUser, setCurrentUser] = useState(localStorage.getItem('current-user'));
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [registered, setRegistered] = useState(false);
 
-useEffect(() => {
-  const token = localStorage.getItem('api-to-go');
-  if (token !== null && currentUser!==null) {
-    setLoggedIn(true);
-  }
-}, [])
+  useEffect(() => {
+    const token = localStorage.getItem('api-to-go');
+    if (token !== null && currentUser!==null) {
+      setLoggedIn(true);
+    }
+  }, []);
+
+
 
   return (
     <div className="App">
