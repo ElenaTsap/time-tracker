@@ -2,6 +2,8 @@ import './Login.css';
 import { useState } from 'react';
 import ApiToGo from "api-to-go"
 import {NavLink} from "react-router-dom";
+import clock from '../assets/Clock.png';
+import girl from '../assets/Girl-time-tracker.png';
 
 const Auth = ({ setLoggedIn, setCurrentUser }) => {
     const [email, setEmail] = useState(null);
@@ -25,7 +27,8 @@ const Auth = ({ setLoggedIn, setCurrentUser }) => {
     }
 
     return (
-        <section className='login-container'>
+        <section className='auth-container'>
+            <h1>Time-tracker</h1>
             <div>
                 <h1>Log In</h1>
                 <form className='form-container' onSubmit={loginHandler}>
@@ -35,6 +38,8 @@ const Auth = ({ setLoggedIn, setCurrentUser }) => {
                 </form>
                 <h4>New user? <NavLink exact to = "/register" className ='nav-link'>Register</NavLink></h4>
             </div>
+            <img src={clock} alt="clock" />
+            <img src={girl} alt="girl" />
         </section>
     )
 }
