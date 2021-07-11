@@ -1,9 +1,8 @@
 import Switch from "react-switch";
-import {useState} from 'react'
 import {ContextCreator} from '../MyContext'
 import {useContext} from 'react'
 
-const MySwitch = ({checked, setChecked}) => {
+const MySwitch = () => {
     const context = useContext(ContextCreator);
 
     const handleChange = () => {

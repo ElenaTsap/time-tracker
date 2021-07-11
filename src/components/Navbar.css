@@ -12,7 +12,7 @@ nav {
     padding: 4px;
     text-decoration: none;
     font-weight: 600;
-   /*  border-radius: 8px; */
+    box-sizing: border-box;
 }
 .nav-item:visited {
     color: black;
@@ -21,11 +21,36 @@ nav {
 .nav-item:hover {
     color: black;
     border: 4px solid #FF5837;
+    box-sizing: border-box;
 }
 
 .active {
     border: 4px solid black;
     color: black;
+}
+
+/* dark styles */
+
+.nav-item-dark {
+    margin-right: 12px;
+    padding: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    box-sizing: border-box;
+}
+.nav-item-dark:visited {
+    color: #FEFEF3;
+}
+
+.nav-item-dark:hover {
+    color: #FEFEF3;
+    border: 4px solid #FF5837;
+    box-sizing: border-box;
+}
+
+.active-dark {
+    border: 4px solid #FEFEF3;
+    color: #FEFEF3;
 }
 
 @media only screen and (max-width: 960px) {

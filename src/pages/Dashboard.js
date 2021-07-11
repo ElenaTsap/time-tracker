@@ -14,16 +14,15 @@ import {useContext} from 'react'
 const Dashboard = ({currentUser, setLoggedIn}) => {
     const context = useContext(ContextCreator);
 
-    const bgColor = context.checked ? {backgroundColor: `#121317`}: {backgroundColor: `#FEFEF3`} ;
+    const bgColor = context.checked ? {backgroundColor: `#51514C`}: {backgroundColor: `#FEFEF3`};
 
     useEffect(() => {
         ApiToGo.get().then(res =>
             {
                 context.setLogData(res[0]);
-                console.log('from else',res[0])
 
             }).catch(error => {
-            console.log(error)
+                console.log(error)
             });
     }, []);
 

@@ -33,7 +33,7 @@ const Auth = ({ setLoggedIn, setCurrentUser }) => {
                 <h1>Log In</h1>
                 <form className='form-container' onSubmit={loginHandler}>
                     <input type='email' placeholder='email' onChange={(e)=>setEmail(e.target.value)}/> <br/>
-                    <input type='text' placeholder='password' onChange={(e)=>setPass(e.target.value)}/>
+                    <input type='password' placeholder='password' onChange={(e)=>setPass(e.target.value)}/>
                     <button type='submit'>LOG IN</button> 
                 </form>
                 <h4>New user? <NavLink exact to = "/register" className ='nav-link'>Register</NavLink></h4>

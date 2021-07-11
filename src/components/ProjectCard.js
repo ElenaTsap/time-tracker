@@ -7,6 +7,8 @@ import { GrClose } from 'react-icons/gr';
 const ProjectCard = ({ item }) => {
     const context = useContext(ContextCreator);
 
+    const stylesMode = context.checked ? 'project-card-dark ': 'project-card-dark';
+
     const activeProjectChecker = (project) => {
         if (project !== context.currentProject && context.timerOn) {
             alert(`${context.currentProject} is running! Stop tracking to change project.`)

@@ -29,7 +29,7 @@ const Polar = ({ totalProjectTimes }) => {
     
     return (
         <>
-            <PolarArea data={data} />
+            <PolarArea data={data}/>
         </>
     );
 }
