@@ -15,11 +15,11 @@ const Header = ({ currentUser, setLoggedIn }) => {
 
     return (
         <section className='header-container'>
-            <h3>Welcome <span>{currentUser}</span></h3>
             <div>
-            <button onClick = {logOut}>logout</button>
-            <div><MySwitch/></div>
+                <h3>Welcome <span>{currentUser}</span></h3>
+                <button onClick = {logOut}>logout</button>
             </div>
+            <div><MySwitch/></div>
         </section>
     )
 }
